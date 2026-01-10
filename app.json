@@ -3,6 +3,7 @@
     "name": "blogmobile",
     "slug": "blogmobile",
     "version": "1.0.0",
+    "main": "./index.js",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "blogmobile",
@@ -26,7 +27,6 @@
       "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
-      "expo-router",
       [
         "expo-splash-screen",
         {
@@ -39,10 +39,6 @@
           }
         }
       ]
-    ],
-    "experiments": {
-      "typedRoutes": true,
-      "reactCompiler": true
-    }
+    ]
   }
 }
