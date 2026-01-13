@@ -1,265 +1,396 @@
 # Blog Mobile
 
-Aplicativo mobile desenvolvido com React Native e Expo para gerenciamento de posts educacionais, com sistema de autenticação e controle de permissões diferenciado para professores e alunos.
+[![React Native](https://img.shields.io/badge/React%20Native-0.81.5-61DAFB?logo=react)](https://reactnative.dev/)
+[![Expo](https://img.shields.io/badge/Expo-~54.0.31-000020?logo=expo)](https://expo.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.9.2-3178C6?logo=typescript)](https://www.typescriptlang.org/)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-## 📱 Sobre o Projeto
+Sistema mobile desenvolvido com React Native e Expo para gerenciamento de conteúdo educacional, implementando controle de acesso baseado em roles (professor/aluno) e operações CRUD completas para posts, professores e alunos.
 
-O Blog Mobile é uma aplicação educacional que permite que professores criem e gerenciem posts educacionais, enquanto alunos têm acesso apenas à visualização. O sistema inclui gerenciamento completo de professores e alunos, além de um sistema robusto de posts com busca e filtros.
+## 📋 Índice
 
-## 🚀 Tecnologias Utilizadas
+- [Sobre o Projeto](#-sobre-o-projeto)
+- [Tecnologias](#-tecnologias)
+- [Arquitetura](#-arquitetura)
+- [Pré-requisitos](#-pré-requisitos)
+- [Instalação](#-instalação)
+- [Configuração](#-configuração)
+- [Uso](#-uso)
+- [Estrutura do Projeto](#-estrutura-do-projeto)
+- [Funcionalidades](#-funcionalidades)
+- [API e Integração](#-api-e-integração)
+- [Segurança e Permissões](#-segurança-e-permissões)
+- [Troubleshooting](#-troubleshooting)
+- [Contribuindo](#-contribuindo)
+- [Licença](#-licença)
 
-- **React Native** - Framework para desenvolvimento mobile
-- **Expo** - Plataforma para desenvolvimento React Native
-- **TypeScript** - Linguagem de programação
-- **React Navigation** - Navegação entre telas (Native Stack)
-- **Context API** - Gerenciamento de estado global (autenticação)
-- **React Hooks** - Gerenciamento de estado e ciclo de vida
+## 🎯 Sobre o Projeto
+
+Blog Mobile é uma aplicação educacional multiplataforma que oferece um sistema completo de gerenciamento de conteúdo acadêmico. A solução implementa um modelo de permissões baseado em roles, onde professores possuem acesso administrativo completo para criação, edição e exclusão de posts, enquanto alunos têm acesso restrito apenas à visualização de conteúdo.
+
+### Características Principais
+
+- **Autenticação e Autorização**: Sistema robusto de autenticação com Context API e controle granular de permissões
+- **Gerenciamento de Conteúdo**: CRUD completo para posts educacionais com busca e filtros em tempo real
+- **Administração de Usuários**: Interface administrativa para gerenciamento de professores e alunos
+- **Arquitetura Modular**: Código organizado seguindo princípios SOLID e separação de responsabilidades
+- **TypeScript**: Tipagem estática para maior segurança e manutenibilidade do código
+- **Pronto para Produção**: Estrutura preparada para integração com APIs REST reais
+
+## 🚀 Tecnologias
+
+### Core
+- **React Native 0.81.5** - Framework para desenvolvimento mobile multiplataforma
+- **Expo ~54.0.31** - Plataforma e ferramentas para desenvolvimento React Native
+- **TypeScript 5.9.2** - Superset JavaScript com tipagem estática
+
+### Navegação e Estado
+- **React Navigation 7.x** - Sistema de navegação nativo (Native Stack Navigator)
+- **Context API** - Gerenciamento de estado global para autenticação
+- **React Hooks** - Gerenciamento de estado local e ciclo de vida
+
+### Desenvolvimento
+- **Expo CLI** - Ferramentas de desenvolvimento e build
+- **ESLint** - Linter para qualidade de código
+- **Git** - Controle de versão
+
+## 🏗️ Arquitetura
+
+O projeto segue uma arquitetura em camadas com separação clara de responsabilidades:
+
+```
+┌─────────────────────────────────────┐
+│         Presentation Layer          │
+│  (Screens, Components, Navigation)  │
+└──────────────┬───────────────────────┘
+               │
+┌──────────────▼───────────────────────┐
+│         Business Logic Layer         │
+│      (Contexts, Custom Hooks)        │
+└──────────────┬───────────────────────┘
+               │
+┌──────────────▼───────────────────────┐
+│          Data Access Layer           │
+│      (Services, API Integration)     │
+└───────────────────────────────────────┘
+```
+
+### Princípios de Design
+
+- **Separação de Responsabilidades**: Cada módulo possui uma responsabilidade única e bem definida
+- **Inversão de Dependências**: Camadas superiores dependem de abstrações, não de implementações
+- **Reutilização de Código**: Componentes e utilitários são projetados para máxima reutilização
+- **Testabilidade**: Estrutura modular facilita testes unitários e de integração
 
 ## 📋 Pré-requisitos
 
-Antes de começar, você precisa ter instalado:
+Antes de iniciar a instalação, certifique-se de possuir os seguintes requisitos:
 
-- [Node.js](https://nodejs.org/) (versão 18 ou superior)
-- [npm](https://www.npmjs.com/) ou [yarn](https://yarnpkg.com/)
-- [Expo CLI](https://docs.expo.dev/get-started/installation/)
-- [Android Studio](https://developer.android.com/studio) (para emulador Android)
-- [Git](https://git-scm.com/)
+### Software Necessário
+
+- **Node.js** >= 18.0.0 ([Download](https://nodejs.org/))
+- **npm** >= 9.0.0 ou **yarn** >= 1.22.0
+- **Git** >= 2.30.0 ([Download](https://git-scm.com/))
+- **Expo CLI** ([Instalação](https://docs.expo.dev/get-started/installation/))
+
+### Para Desenvolvimento Android
+
+- **Android Studio** ([Download](https://developer.android.com/studio))
+- **Android SDK** (instalado via Android Studio)
+- **Emulador Android** ou dispositivo físico com modo desenvolvedor ativado
+
+### Para Desenvolvimento iOS (Opcional)
+
+- **Xcode** >= 14.0 (apenas macOS)
+- **CocoaPods** >= 1.11.0
 
 ## 🛠️ Instalação
 
-1. Clone o repositório:
+### 1. Clonar o Repositório
+
 ```bash
-git clone https://github.com/seu-usuario/blogmobile.git
+git clone https://github.com/dev-pedrosantos/blogmobile.git
 cd blogmobile
 ```
 
-2. Instale as dependências:
+### 2. Instalar Dependências
+
 ```bash
 npm install
 ```
 
-3. Inicie o servidor Expo:
+### 3. Iniciar o Servidor de Desenvolvimento
+
 ```bash
 npx expo start
 ```
 
-4. Para executar no emulador Android:
-   - Certifique-se de que o emulador Android está rodando
-   - Pressione `a` no terminal do Expo para abrir no Android
+### 4. Executar no Dispositivo/Emulador
+
+**Android:**
+```bash
+# Certifique-se de que o emulador está rodando
+npx expo start --android
+# Ou pressione 'a' no terminal do Expo
+```
+
+**iOS (apenas macOS):**
+```bash
+npx expo start --ios
+# Ou pressione 'i' no terminal do Expo
+```
+
+## ⚙️ Configuração
+
+### Variáveis de Ambiente
+
+O projeto utiliza dados mockados por padrão. Para configurar uma API real, edite `src/services/api.ts`:
+
+```typescript
+const API_BASE_URL = 'https://api.exemplo.com';
+const USE_MOCK = false;
+```
+
+### Credenciais de Acesso
+
+O sistema inclui usuários de demonstração pré-configurados:
+
+| Tipo | Email | Senha |
+|------|-------|-------|
+| Professor | `professor@blog.com` | `123456` |
+| Aluno | `aluno@blog.com` | `123456` |
+
+## 📖 Uso
+
+### Fluxo de Autenticação
+
+1. Inicie o aplicativo
+2. Faça login com uma das credenciais acima
+3. O sistema redirecionará automaticamente baseado no tipo de usuário
+
+### Funcionalidades por Perfil
+
+**Professor:**
+- Acesso completo ao sistema
+- Criação, edição e exclusão de posts
+- Gerenciamento de professores e alunos
+- Visualização de todos os posts
+
+**Aluno:**
+- Visualização de posts
+- Busca e filtros
+- Acesso bloqueado a funcionalidades administrativas
 
 ## 📁 Estrutura do Projeto
 
 ```
 blogmobile/
 ├── src/
-│   ├── screens/              # Telas da aplicação
-│   │   ├── LoginScreen.tsx
-│   │   ├── PostsListScreen.tsx
-│   │   ├── PostDetailScreen.tsx
-│   │   ├── CreatePostScreen.tsx
-│   │   ├── EditPostScreen.tsx
-│   │   ├── AdminPostsScreen.tsx
-│   │   ├── Professores/
+│   ├── screens/                    # Camada de apresentação
+│   │   ├── LoginScreen.tsx         # Tela de autenticação
+│   │   ├── PostsListScreen.tsx     # Listagem de posts
+│   │   ├── PostDetailScreen.tsx    # Detalhes do post
+│   │   ├── CreatePostScreen.tsx    # Criação de post
+│   │   ├── EditPostScreen.tsx      # Edição de post
+│   │   ├── AdminPostsScreen.tsx    # Painel administrativo
+│   │   ├── Professores/            # Módulo de professores
 │   │   │   ├── ProfessoresListScreen.tsx
 │   │   │   ├── CreateProfessorScreen.tsx
 │   │   │   └── EditProfessorScreen.tsx
-│   │   └── Alunos/
+│   │   └── Alunos/                 # Módulo de alunos
 │   │       ├── AlunosListScreen.tsx
 │   │       ├── CreateAlunoScreen.tsx
 │   │       └── EditAlunoScreen.tsx
-│   ├── components/           # Componentes reutilizáveis
-│   ├── services/             # Serviços de API e dados mockados
-│   │   ├── api.ts
-│   │   └── mockData.ts
-│   ├── contexts/             # Contextos React
-│   │   └── AuthContext.tsx
-│   └── navigation/           # Configuração de navegação
-│       ├── AppNavigator.tsx
-│       └── types.ts
-├── App.tsx                   # Componente raiz da aplicação
-├── index.js                  # Ponto de entrada da aplicação
-├── app.json                  # Configurações do Expo
-└── package.json              # Dependências do projeto
+│   ├── components/                 # Componentes reutilizáveis
+│   ├── services/                   # Camada de serviços
+│   │   ├── api.ts                  # Integração com API
+│   │   └── mockData.ts             # Dados mockados
+│   ├── contexts/                   # Contextos React
+│   │   └── AuthContext.tsx         # Contexto de autenticação
+│   └── navigation/                 # Configuração de navegação
+│       ├── AppNavigator.tsx        # Navegador principal
+│       └── types.ts                # Tipos TypeScript
+├── App.tsx                         # Componente raiz
+├── index.js                        # Ponto de entrada
+├── app.json                        # Configurações Expo
+└── package.json                     # Dependências
 ```
-
-## 👥 Usuários do Sistema
-
-### Credenciais de Acesso
-
-**Professor:**
-- Email: `professor@blog.com`
-- Senha: `123456`
-
-**Aluno:**
-- Email: `aluno@blog.com`
-- Senha: `123456`
-
-## 🔐 Sistema de Autenticação
-
-O sistema utiliza Context API para gerenciar o estado de autenticação globalmente. O `AuthContext` fornece:
-
-- Estado do usuário autenticado
-- Tipo de usuário (professor ou aluno)
-- Funções de login e logout
-- Verificações de permissão (isProfessor, isAluno)
 
 ## 🎯 Funcionalidades
 
-### Para Professores
+### Sistema de Autenticação
 
-- ✅ Login e autenticação
-- ✅ Visualização de todos os posts
-- ✅ Busca e filtro de posts
-- ✅ Criação de novos posts
-- ✅ Edição de posts próprios
-- ✅ Exclusão de posts próprios
-- ✅ Gerenciamento de posts (página administrativa)
-- ✅ Gerenciamento completo de professores (CRUD)
-- ✅ Gerenciamento completo de alunos (CRUD)
-- ✅ Listagem paginada de professores e alunos
-
-### Para Alunos
-
-- ✅ Login e autenticação
-- ✅ Visualização de todos os posts
-- ✅ Busca e filtro de posts
-- ✅ Leitura completa dos posts
-- ❌ Bloqueio de todas as telas administrativas
-
-## 📝 Gerenciamento de Posts
-
-### Listagem de Posts
-- Visualização de todos os posts disponíveis
-- Busca em tempo real por título, descrição ou autor
-- Pull-to-refresh para atualizar a lista
-- Cards informativos com título, descrição e autor
-
-### Detalhes do Post
-- Visualização completa do conteúdo
-- Informações do autor e data de criação
-- Botões de edição e exclusão (apenas para o autor professor)
-
-### Criação e Edição
-- Formulário completo com validação
-- Campos: Título, Descrição e Conteúdo
-- Associação automática com o professor logado
-
-## 👨‍🏫 Gerenciamento de Professores
-
-- Listagem paginada de professores
-- Criação de novos professores
-- Edição de dados de professores
-- Exclusão de professores
-- Campos: Nome e Email
-
-## 👨‍🎓 Gerenciamento de Alunos
-
-- Listagem paginada de alunos
-- Criação de novos alunos
-- Edição de dados de alunos
-- Exclusão de alunos
-- Campos: Nome e Email
-
-## 🔌 Integração com API
-
-O sistema está preparado para integração com API REST. Atualmente utiliza dados mockados para desenvolvimento e testes.
-
-### Configuração da API
-
-Para conectar a uma API real, edite o arquivo `src/services/api.ts`:
-
-```typescript
-const API_BASE_URL = 'https://sua-api.com';
-const USE_MOCK = false;
-```
-
-A interface da API está definida e pronta para receber os seguintes endpoints:
-
-- `POST /auth/login` - Autenticação
-- `GET /posts` - Listar posts
-- `GET /posts/:id` - Buscar post por ID
-- `POST /posts` - Criar post
-- `PUT /posts/:id` - Atualizar post
-- `DELETE /posts/:id` - Excluir post
-- `GET /professores?page=1&limit=10` - Listar professores
-- `POST /professores` - Criar professor
-- `PUT /professores/:id` - Atualizar professor
-- `DELETE /professores/:id` - Excluir professor
-- `GET /alunos?page=1&limit=10` - Listar alunos
-- `POST /alunos` - Criar aluno
-- `PUT /alunos/:id` - Atualizar aluno
-- `DELETE /alunos/:id` - Excluir aluno
-
-## 🔒 Controle de Permissões
-
-O sistema implementa controle rigoroso de permissões:
-
-- **Professores**: Acesso total a todas as funcionalidades
-- **Alunos**: Acesso apenas à visualização de posts
-- Navegação condicional baseada no tipo de usuário
+- Autenticação baseada em email e senha
+- Gerenciamento de sessão com Context API
+- Redirecionamento automático baseado em role
 - Proteção de rotas no nível de navegação
-- Validação adicional nas telas sensíveis
 
-## 🎨 Interface do Usuário
+### Gerenciamento de Posts
+
+**Listagem:**
+- Visualização paginada de posts
+- Busca em tempo real (título, descrição, autor)
+- Pull-to-refresh para atualização
+- Cards informativos com metadados
+
+**Operações CRUD:**
+- Criação com validação de formulário
+- Edição com pré-preenchimento
+- Exclusão com confirmação
+- Visualização completa de conteúdo
+
+### Administração de Usuários
+
+**Professores:**
+- Listagem paginada
+- Criação, edição e exclusão
+- Validação de dados de entrada
+
+**Alunos:**
+- Listagem paginada
+- Criação, edição e exclusão
+- Validação de dados de entrada
+
+### Interface do Usuário
 
 - Design moderno e responsivo
-- Cores e estilos consistentes
 - Feedback visual para todas as ações
 - Estados de carregamento
-- Mensagens de erro amigáveis
-- Animações suaves
+- Tratamento de erros com mensagens amigáveis
+- Animações suaves e transições
 
-## 📱 Navegação
+## 🔌 API e Integração
 
-O aplicativo utiliza React Navigation com Native Stack Navigator:
+### Estrutura de API
 
-- Navegação hierárquica entre telas
-- Headers personalizados
-- Botão de logout na tela principal
-- Navegação condicional baseada em autenticação
-- Proteção de rotas administrativas
+O sistema está preparado para integração com APIs RESTful. A interface está definida em `src/services/api.ts` e suporta os seguintes endpoints:
 
-## 🧪 Dados Iniciais
+#### Autenticação
+```
+POST   /auth/login
+```
 
-O sistema vem pré-configurado com dados de demonstração:
+#### Posts
+```
+GET    /posts
+GET    /posts/:id
+POST   /posts
+PUT    /posts/:id
+DELETE /posts/:id
+```
 
-- 2 usuários (1 professor, 1 aluno)
-- 2 professores
-- 3 alunos
-- 5 posts educacionais completos
+#### Professores
+```
+GET    /professores?page=1&limit=10
+POST   /professores
+PUT    /professores/:id
+DELETE /professores/:id
+```
 
-Todos os dados são carregados automaticamente ao iniciar o aplicativo.
+#### Alunos
+```
+GET    /alunos?page=1&limit=10
+POST   /alunos
+PUT    /alunos/:id
+DELETE /alunos/:id
+```
 
-## 🐛 Solução de Problemas
+### Modo Mock
 
-### Erro ao iniciar o servidor
+Por padrão, o sistema utiliza dados mockados armazenados em memória. Para ativar a integração com API real, configure `USE_MOCK = false` em `src/services/api.ts`.
 
+## 🔒 Segurança e Permissões
+
+### Modelo de Controle de Acesso
+
+O sistema implementa um modelo RBAC (Role-Based Access Control) com dois níveis:
+
+**Nível 1 - Navegação:**
+- Rotas administrativas são registradas condicionalmente baseadas no tipo de usuário
+- Alunos não possuem acesso às rotas de gerenciamento
+
+**Nível 2 - Validação:**
+- Verificações adicionais em componentes sensíveis
+- Validação de propriedade (apenas o autor pode editar/excluir seus posts)
+
+### Implementação
+
+```typescript
+// Exemplo de proteção de rota
+{isProfessor && (
+  <Stack.Screen name="AdminPosts" component={AdminPostsScreen} />
+)}
+```
+
+## 🐛 Troubleshooting
+
+### Problemas Comuns
+
+**Erro ao iniciar o servidor:**
 ```bash
 npx expo start --clear
 ```
 
-### Problemas com cache
-
+**Problemas com cache:**
 ```bash
 npm start -- --reset-cache
 ```
 
-### Erro no emulador Android
+**Erro no emulador Android:**
+- Verifique se o Android Studio está rodando
+- Certifique-se de que o emulador está ativo
+- Verifique se as variáveis de ambiente ANDROID_HOME estão configuradas
 
-Certifique-se de que o Android Studio está rodando e o emulador está ativo antes de pressionar `a`.
+**Erro de dependências:**
+```bash
+rm -rf node_modules
+npm install
+```
 
-## 📄 Licença
+## 📸 Demonstração
 
-Este projeto está sob a licença MIT.
-
-## 👨‍💻 Desenvolvedor
-
-Desenvolvido com ❤️ usando React Native e Expo.
+> **⚠️ Nota Importante sobre Demonstração em Vídeo**
+> 
+> Infelizmente, não foi possível criar uma demonstração em vídeo deste projeto devido a limitações de hardware tanto no computador quanto no dispositivo móvel disponíveis. O computador utilizado não possui recursos suficientes para gravar a tela enquanto executa o emulador Android, e o dispositivo móvel disponível não atende aos requisitos mínimos para captura de tela de qualidade.
+> 
+> No entanto, o projeto está completamente funcional e pode ser testado seguindo as instruções de instalação acima. Todas as funcionalidades descritas neste README foram implementadas e testadas. Para uma experiência completa, recomenda-se executar o projeto localmente ou em um dispositivo/emulador com recursos adequados.
 
 ## 🤝 Contribuindo
 
-Contribuições são sempre bem-vindas! Sinta-se à vontade para abrir uma issue ou enviar um pull request.
+Contribuições são bem-vindas! Para contribuir:
+
+1. Faça um fork do projeto
+2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
+3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
+4. Push para a branch (`git push origin feature/AmazingFeature`)
+5. Abra um Pull Request
+
+### Padrões de Código
+
+- Siga os padrões de código TypeScript/React Native
+- Mantenha a estrutura de pastas existente
+- Adicione comentários quando necessário
+- Escreva commits descritivos
+
+## 📄 Licença
+
+Este projeto está licenciado sob a Licença MIT - veja o arquivo [LICENSE](LICENSE) para detalhes.
+
+## 👨‍💻 Autor
+
+**Pedro Santos**
+
+- GitHub: [@dev-pedrosantos](https://github.com/dev-pedrosantos)
+- Email: pedrostdev@gmail.com
+
+## 🙏 Agradecimentos
+
+- [React Native Community](https://reactnative.dev/)
+- [Expo Team](https://expo.dev/)
+- [React Navigation](https://reactnavigation.org/)
 
 ---
 
-**Nota**: Este projeto foi desenvolvido para fins educacionais e demonstração de conceitos de desenvolvimento mobile com React Native.
+**Desenvolvido com ❤️ usando React Native e Expo**
+
+*Este projeto foi desenvolvido para fins educacionais e demonstração de conceitos avançados de desenvolvimento mobile com React Native.*
