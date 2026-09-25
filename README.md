@@ -383,12 +383,6 @@ Este projeto está licenciado sob a Licença MIT - veja o arquivo [LICENSE](LICE
 - GitHub: [@dev-pedrosantos](https://github.com/dev-pedrosantos)
 - Email: pedrostdev@gmail.com
 
-## 🙏 Agradecimentos
-
-- [React Native Community](https://reactnative.dev/)
-- [Expo Team](https://expo.dev/)
-- [React Navigation](https://reactnavigation.org/)
-
 ---
 
 **Desenvolvido com ❤️ usando React Native e Expo**
